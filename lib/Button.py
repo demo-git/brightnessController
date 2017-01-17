@@ -11,6 +11,7 @@ class Button(Sensor):
         Sensor.__init__(self, channel)
         self.__lock = Lock()
 
+    # notify all of observers if state change
     def notify(self, args):
         if args == 1:
             self.__lock.acquire()
@@ -24,8 +25,9 @@ class Button(Sensor):
 
             self.__lock.release()
 
+    # return current state
     def get_state(self):
         self.__lock.acquire()
-        state =  self.__state
+        state = self.__state
         self.__lock.release()
         return state

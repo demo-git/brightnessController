@@ -13,6 +13,7 @@ class Hue:
         self.__number = number
         self.__user = user
 
+    # change the state of hue light and its intensity
     def change_state(self, on, intensity=None):
         intensity = (intensity*254)/100
         request = httplib.HTTPSConnection(self.__connect)
@@ -31,6 +32,7 @@ class Hue:
 
         request.close()
 
+    # callback observer
     def update(self, intensity):
         if intensity > 0:
             self.change_state(1, intensity)

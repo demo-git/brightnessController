@@ -11,12 +11,15 @@ class Sensor(Observable):
         self.__channel = channel
         GPIO.setup(channel, GPIO.IN)
 
+    # callback observer
     def update(self):
         self.notify(GPIO.input(self.__channel))
 
+    # add an event for listen GPIO
     def add_event(self):
         GPIO.add_event_callback(self.__channel, GPIO.FALLING, callback=self.update(), bouncetime=200)
 
+    # remove event of listen GPIO
     def remove_event(self):
         GPIO.remove_event_detect(self.__channel)
 

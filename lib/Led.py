@@ -9,6 +9,7 @@ class Led:
         self.__channel = channel
         GPIO.setup(channel, GPIO.OUT)
 
+    # callback observer
     def update(self, state):
         GPIO.output(self.__channel, state)
 

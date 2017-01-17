@@ -15,9 +15,11 @@ percent = 70
 maxi = 1024
 state = 0
 
-# GPIO.setwarnings(False)
+# set warnings to false in production
+GPIO.setwarnings(True)
 GPIO.setmode(GPIO.BOARD)
 
+# init object
 sensor = BrightnessSensor(channel_brightness, percent, maxi)
 factory = HueFactory()
 status = factory.get_connect()
@@ -36,7 +38,8 @@ else:
 button = Button(channel_button)
 led = Led(channel_led)
 
-while 1 == 1:
+# works
+while True:
     if button.get_state() == 1:
         if state == 0:
             state = 1
@@ -46,4 +49,5 @@ while 1 == 1:
             state = 0
             sensor.remove_event()
 
+    # sleep for optimize performance
     time.sleep(0.2)

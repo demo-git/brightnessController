@@ -11,6 +11,7 @@ class BrightnessSensor(Sensor):
         self.__threshold = threshold
         self.__max = maxi
 
+    # notify all observers with the new intensity
     def notify(self, args):
         # percent of luminosity
         args = (args*self.__max)/100

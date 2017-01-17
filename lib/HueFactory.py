@@ -10,6 +10,7 @@ class HueFactory:
     __user = None
     __nbhue = None
 
+    # construct object and detect hue bridge
     def __init__(self):
         request = httplib.HTTPSConnection(self.__connect)
         request.request("GET", "https://www.meethue.com/api/nupnp")
@@ -25,6 +26,7 @@ class HueFactory:
 
         request.close()
 
+    # generate hue objects
     def generate(self):
         observers = []
         i = 1
@@ -35,6 +37,7 @@ class HueFactory:
 
         return observers
 
+    # get user for use api of hue bridge
     def get_user(self):
         status = 0
         x = 0
@@ -55,6 +58,7 @@ class HueFactory:
             x += 1
             request.close()
 
+    # get number of hue light on this bridge
     def get_lights(self):
         request = httplib.HTTPSConnection(self.__connect)
         string = "http://" + self.__connect + "/api/" + self.__user + "/lights"
@@ -73,5 +77,7 @@ class HueFactory:
         request.close()
         return status
 
+    # get current connect string
+    # return "error" if connection is impossible
     def get_connect(self):
         return self.__connect

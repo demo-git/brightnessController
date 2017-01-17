@@ -1,5 +1,5 @@
 # coding: utf-8
-import Sensor
+from Sensor import Sensor
 
 
 class BrightnessSensor(Sensor):
@@ -7,7 +7,7 @@ class BrightnessSensor(Sensor):
     __max = None
 
     def __init__(self, channel, threshold, maxi):
-        Sensor.Sensor.__init__(self, channel)
+        Sensor.__init__(self, channel)
         self.__threshold = threshold
         self.__max = maxi
 

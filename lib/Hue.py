@@ -19,7 +19,7 @@ class Hue:
         string = "http://" + self.__connect + "/api/" + self.__user + "/lights/" + str(self.__number) + "/state"
 
         if on == 1:
-            request.request("PUT", string, '{"on":true, "bri":' + intensity + '}')
+            request.request("PUT", string, '{"on":true, "bri":' + str(intensity) + '}')
         else:
             request.request("PUT", string, '{"on":false}')
 
@@ -28,6 +28,8 @@ class Hue:
             logging.log(logging.INFO, 'PUT on/off 200')
         else:
             logging.log(logging.INFO, 'PUT on/off ' + response.status)
+
+        request.close()
 
     def update(self, intensity):
         if intensity > 0:

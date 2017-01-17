@@ -1,8 +1,9 @@
 # coding: utf-8
 import RPi.GPIO as GPIO
+from Observer import Observer
 
 
-class Led:
+class Led(Observer):
     __channel = None
 
     def __init__(self, channel):

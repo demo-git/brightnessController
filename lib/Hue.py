@@ -1,9 +1,10 @@
 # coding: utf-8
 import httplib
 import logging
+from Observer import Observer
 
 
-class Hue:
+class Hue(Observer):
     __connect = None
     __number = None
     __user = None

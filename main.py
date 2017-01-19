@@ -33,6 +33,7 @@ GPIO.setmode(GPIO.BOARD)
 
 # init object
 sys.stdout.writelines('create sensor\r')
+sys.stdout.flush()
 sensor = BrightnessSensor(channel_brightness, percent, maxi)
 sys.stdout.writelines('create factory\r')
 factory = HueFactory()

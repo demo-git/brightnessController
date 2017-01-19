@@ -30,7 +30,7 @@ class Hue(Observer):
         if response.status == 200:
             logging.log(logging.INFO, 'PUT on/off 200')
         else:
-            logging.log(logging.INFO, 'PUT on/off ' + response.status)
+            logging.log(logging.INFO, 'PUT on/off ' + str(response.status))
 
         request.close()
 

@@ -16,13 +16,13 @@ class HueFactory:
         request = httplib.HTTPSConnection("www.meethue.com")
         request.request("GET", "/api/nupnp")
         response = request.getresponse()
+        data = json.loads(response.read())
 
-        if response.status == 200:
+        if response.status == 200 and 'internalipaddress' in data[0]:
             logging.log(logging.INFO, 'POST upnp 200')
-            data = json.loads(response.read())
             self.__connect = data[0]['internalipaddress']
         else:
-            logging.log(logging.INFO, 'POST upnp ' + response.status)
+            logging.log(logging.INFO, 'POST upnp ' + str(response.status))
             self.__connect = "error"
 
         request.close()
@@ -47,12 +47,12 @@ class HueFactory:
             request.request("POST", "/api", '{"devicetype":"rasp_brightness_sensor"}')
             response = request.getresponse()
             data = json.loads(response.read())
-            if 'success' in data[0]:
+            if 'success' in data[0] and response.status == 200:
                 logging.log(logging.INFO, 'POST get_user 200')
                 self.__user = data[0]['success']['username']
                 status = 1
             else:
-                logging.log(logging.INFO, 'POST get_user ' + response.status)
+                logging.log(logging.INFO, 'POST get_user ' + str(response.status))
                 sys.stdout.write(data[0]['error'])
 
             x += 1
@@ -64,14 +64,14 @@ class HueFactory:
         request.request("GET", "/api/" + self.__user + "/lights")
         response = request.getresponse()
         status = 0
+        data = json.loads(response.read())
 
-        if response.status == 200:
+        if response.status == 200 and 'error' not in data[0]:
             logging.log(logging.INFO, 'GET get_lights 200')
-            data = json.loads(response.read())
             self.__nbhue = data[0].count()
             status = 1
         else:
-            logging.log(logging.INFO, 'GET get_lights ' + response.status)
+            logging.log(logging.INFO, 'GET get_lights ' + str(response.status))
 
         request.close()
         return status

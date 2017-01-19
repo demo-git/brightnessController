@@ -3,6 +3,7 @@ import httplib
 import logging
 import json
 from Hue import Hue
+import time
 import sys
 
 
@@ -54,6 +55,7 @@ class HueFactory:
             else:
                 logging.log(logging.INFO, 'POST get_user ' + str(response.status))
                 sys.stdout.write(data[0]['error']['description'])
+                time.sleep(2)
 
             x += 1
             request.close()

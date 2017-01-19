@@ -43,7 +43,7 @@ class HueFactory:
         status = 0
         x = 0
         while status != 1 and x < 5:
-            sys.stdout.writelines(x)
+            sys.stdout.write(x)
             request = httplib.HTTPConnection(self.__connect)
             request.request("POST", "/api", '{"devicetype":"rasp_brightness_sensor"}')
             response = request.getresponse()
@@ -55,7 +55,7 @@ class HueFactory:
                 status = 1
             else:
                 logging.log(logging.INFO, 'POST get_user ' + response.status)
-                sys.stdout.writelines(response.status)
+                sys.stdout.write(response.status)
 
             x += 1
             request.close()

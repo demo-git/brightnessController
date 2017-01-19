@@ -3,6 +3,7 @@ import httplib
 import logging
 import json
 from Hue import Hue
+import sys
 
 
 class HueFactory:
@@ -19,7 +20,7 @@ class HueFactory:
         if response.status == 200:
             logging.log(logging.INFO, 'POST upnp 200')
             data = json.dumps(response.read())
-            logging.log(logging.INFO, data[0])
+            sys.stdout.writelines(data[0])
             self.__connect = data['internalipaddress']
         else:
             logging.log(logging.INFO, 'POST upnp ' + response.status)

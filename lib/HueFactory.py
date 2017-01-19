@@ -51,6 +51,7 @@ class HueFactory:
             sys.stdout.write('test')
             if response.status == 200:
                 logging.log(logging.INFO, 'POST get_user 200')
+                sys.stdout.write(response.read())
                 data = json.loads(response.read())
                 self.__user = data[0]['success']['username']
                 status = 1

@@ -58,6 +58,8 @@ class HueFactory:
             x += 1
             request.close()
 
+        return status
+
     # get number of hue light on this bridge
     def get_lights(self):
         request = httplib.HTTPConnection(self.__connect)

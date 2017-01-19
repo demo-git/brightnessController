@@ -37,10 +37,13 @@ factory = HueFactory()
 status = factory.get_connect()
 if status != 'error':
     status = factory.get_user()
+    sys.stdout.write('trouver user\r')
     if status != 0:
         status = factory.get_lights()
+        sys.stdout.write('compter les hues\r')
         if status != 0:
             sensor.add_observers(factory.generate())
+            sys.stdout.write('générer les hues\r')
         else:
             logging.log(logging.ERROR, 'impossible de générer les hues')
             sys.stdout.write('impossible de générer les hues\r')

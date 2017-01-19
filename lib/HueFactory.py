@@ -73,7 +73,6 @@ class HueFactory:
         if response.status == 200 and 'error' not in data:
             logging.log(logging.INFO, 'GET get_lights 200')
             self.__nbhue = len(data)
-            sys.stdout.write(str(self.__nbhue))
             status = 1
         else:
             logging.log(logging.INFO, 'GET get_lights ' + str(response.status))

@@ -39,19 +39,17 @@ if status != 'error':
     status = factory.get_user()
     if status != 0:
         status = factory.get_lights()
-        sys.stdout.writelines('compter les hues\r')
         if status != 0:
             sensor.add_observers(factory.generate())
-            sys.stdout.writelines('générer les hues\r')
         else:
             logging.log(logging.ERROR, 'impossible de générer les hues')
-            sys.stdout.writelines('impossible de générer les hues\r')
     else:
         logging.log(logging.ERROR, 'pas de user trouvé')
-        sys.stdout.writelines('pas de user trouvé\r')
 else:
     logging.log(logging.ERROR, 'pas de bridge trouvé')
-    sys.stdout.writelines('pas de bridge trouvé\r')
+
+sensor.update()
+
 button = Button(channel_button)
 led = Led(channel_led)
 

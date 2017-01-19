@@ -46,13 +46,14 @@ class HueFactory:
             request = httplib.HTTPConnection(self.__connect)
             request.request("POST", "/api", '{"devicetype":"rasp_brightness_sensor"}')
             response = request.getresponse()
-            if response.status == 200:
+            data = json.loads(response.read())
+            if data[0]['success']:
                 logging.log(logging.INFO, 'POST get_user 200')
-                data = json.loads(response.read())
                 self.__user = data[0]['success']['username']
                 status = 1
             else:
                 logging.log(logging.INFO, 'POST get_user ' + response.status)
+                sys.stdout.write(data[0]['error'])
 
             x += 1
             request.close()

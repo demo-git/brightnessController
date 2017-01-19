@@ -29,7 +29,7 @@ state = 0
 
 # set warnings to false in production
 GPIO.setwarnings(True)
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
 # init object
 sensor = BrightnessSensor(channel_brightness, percent, maxi)

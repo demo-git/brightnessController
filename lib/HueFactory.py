@@ -68,13 +68,13 @@ class HueFactory:
         request.request("GET", "/api/" + self.__user + "/lights")
         response = request.getresponse()
         status = 0
-        data = json.loads(response.read())
         sys.stdout.write(response.read())
+        data = json.loads(response.read())
 
         if response.status == 200 and 'error' not in data:
 
             logging.log(logging.INFO, 'GET get_lights 200')
-            self.__nbhue = data.count()
+            self.__nbhue = data[0].count()
             status = 1
         else:
             logging.log(logging.INFO, 'GET get_lights ' + str(response.status))

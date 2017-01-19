@@ -27,7 +27,7 @@ percent = options.percent
 maxi = 1024
 state = 0
 
-# set warnings to false in production
+# TODO: set warnings to false in production
 GPIO.setwarnings(True)
 GPIO.setmode(GPIO.BCM)
 
@@ -47,9 +47,6 @@ if status != 'error':
         logging.log(logging.ERROR, 'pas de user trouvé')
 else:
     logging.log(logging.ERROR, 'pas de bridge trouvé')
-
-# TODO: supprimer après test
-sensor.update()
 
 button = Button(channel_button)
 led = Led(channel_led)

@@ -3,7 +3,6 @@ import httplib
 import logging
 import json
 from Hue import Hue
-import sys
 
 
 class HueFactory:
@@ -20,8 +19,7 @@ class HueFactory:
         if response.status == 200:
             logging.log(logging.INFO, 'POST upnp 200')
             data = json.loads(response.read())
-            sys.stdout.write(data[0]['internalipaddress'])
-            self.__connect = data['internalipaddress']
+            self.__connect = data[0]['internalipaddress']
         else:
             logging.log(logging.INFO, 'POST upnp ' + response.status)
             self.__connect = "error"
@@ -50,8 +48,8 @@ class HueFactory:
 
             if response.status == 200:
                 logging.log(logging.INFO, 'POST get_user 200')
-                data = json.dumps(response.read())
-                self.__user = data['success']['username']
+                data = json.loads(response.read())
+                self.__user = data[0]['success']['username']
                 status = 1
             else:
                 logging.log(logging.INFO, 'POST get_user ' + response.status)
@@ -68,8 +66,8 @@ class HueFactory:
 
         if response.status == 200:
             logging.log(logging.INFO, 'GET get_lights 200')
-            data = json.dumps(response.read())
-            self.__nbhue = data.count()
+            data = json.loads(response.read())
+            self.__nbhue = data[0].count()
             status = 1
         else:
             logging.log(logging.INFO, 'GET get_lights ' + response.status)

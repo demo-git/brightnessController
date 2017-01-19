@@ -47,7 +47,7 @@ class HueFactory:
             request.request("POST", "/api", '{"devicetype":"rasp_brightness_sensor"}')
             response = request.getresponse()
             data = json.loads(response.read())
-            if data[0]['success']:
+            if 'success' in data[0]:
                 logging.log(logging.INFO, 'POST get_user 200')
                 self.__user = data[0]['success']['username']
                 status = 1

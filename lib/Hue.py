@@ -2,6 +2,7 @@
 import httplib
 import logging
 from Observer import Observer
+import sys
 
 
 class Hue(Observer):
@@ -36,6 +37,7 @@ class Hue(Observer):
 
     # callback observer
     def update(self, intensity):
+        sys.stdout.write('change\r' + str(intensity))
         if intensity > 0:
             self.change_state(1, intensity)
         else:

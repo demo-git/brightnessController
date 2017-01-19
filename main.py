@@ -55,6 +55,7 @@ led = Led(channel_led)
 
 # works
 while True:
+    sys.stdout.writelines('0')
     if button.get_state() == 1:
         if state == 0:
             sys.stdout.writelines('change state to active\r')

@@ -10,6 +10,7 @@ class Hue(Observer):
     __user = None
 
     def __init__(self, connect, number, user):
+        Observer.__init__(self)
         self.__connect = connect
         self.__number = number
         self.__user = user
@@ -17,8 +18,8 @@ class Hue(Observer):
     # change the state of hue light and its intensity
     def change_state(self, on, intensity=None):
         intensity = (intensity*254)/100
-        request = httplib.HTTPSConnection(self.__connect)
-        string = "http://" + self.__connect + "/api/" + self.__user + "/lights/" + str(self.__number) + "/state"
+        request = httplib.HTTPConnection(self.__connect)
+        string = "/api/" + self.__user + "/lights/" + str(self.__number) + "/state"
 
         if on == 1:
             request.request("PUT", string, '{"on":true, "bri":' + str(intensity) + '}')

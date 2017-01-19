@@ -12,8 +12,8 @@ class HueFactory:
 
     # construct object and detect hue bridge
     def __init__(self):
-        request = httplib.HTTPSConnection(self.__connect)
-        request.request("GET", "https://www.meethue.com/api/nupnp")
+        request = httplib.HTTPSConnection("www.meethue.com")
+        request.request("GET", "/api/nupnp")
         response = request.getresponse()
 
         if response.status == 200:
@@ -42,9 +42,8 @@ class HueFactory:
         status = 0
         x = 0
         while status != 1 and x < 5:
-            request = httplib.HTTPSConnection(self.__connect)
-            string = "http://" + self.__connect + "/api"
-            request.request("POST", string, '{"devicetype":"rasp_brightness_sensor"}')
+            request = httplib.HTTPConnection(self.__connect)
+            request.request("POST", "/api", '{"devicetype":"rasp_brightness_sensor"}')
             response = request.getresponse()
 
             if response.status == 200:
@@ -60,9 +59,8 @@ class HueFactory:
 
     # get number of hue light on this bridge
     def get_lights(self):
-        request = httplib.HTTPSConnection(self.__connect)
-        string = "http://" + self.__connect + "/api/" + self.__user + "/lights"
-        request.request("GET", string)
+        request = httplib.HTTPConnection(self.__connect)
+        request.request("GET", "/api/" + self.__user + "/lights")
         response = request.getresponse()
         status = 0
 

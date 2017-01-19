@@ -21,7 +21,7 @@ class BrightnessSensor(Sensor):
             # percent of hue use needs
             args = 100 - ((args*100)/self.__threshold)
 
-        for observer in self.__observers:
+        for observer in self._observers:
             observer.update(args)
 
     # TODO: supprimer après test

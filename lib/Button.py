@@ -20,7 +20,7 @@ class Button(Sensor):
             else:
                 self.__state = 0
 
-            for observer in self.__observers:
+            for observer in self._observers:
                 observer.update(self.__state)
 
             self.__lock.release()

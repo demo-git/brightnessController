@@ -19,10 +19,8 @@ class HueFactory:
 
         if response.status == 200:
             logging.log(logging.INFO, 'POST upnp 200')
-            data = response.read()
-            sys.stdout.writelines(data)
-            json.dump("internalipaddress", data)
-            sys.stdout.writelines(data.getValue())
+            data = json.loads(response.read())
+            sys.stdout.writelines(data['internalipaddress'])
             self.__connect = data['internalipaddress']
         else:
             logging.log(logging.INFO, 'POST upnp ' + response.status)

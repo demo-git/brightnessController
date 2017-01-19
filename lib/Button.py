@@ -1,6 +1,7 @@
 # coding: utf-8
 from Sensor import Sensor
 from threading import Lock
+import sys
 
 
 class Button(Sensor):
@@ -13,6 +14,7 @@ class Button(Sensor):
 
     # notify all of observers if state change
     def notify(self, args):
+        sys.stdout.write(str(args))
         if args == 1:
             self.__lock.acquire()
             if self.__state == 0:

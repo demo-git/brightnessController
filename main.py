@@ -48,6 +48,7 @@ if status != 'error':
 else:
     logging.log(logging.ERROR, 'pas de bridge trouvé')
 
+# TODO: supprimer après test
 sensor.update()
 
 button = Button(channel_button)
@@ -68,6 +69,3 @@ while True:
 
     # sleep for optimize performance
     time.sleep(0.2)
-
-    # TODO: supprimer après test
-    # sensor.update()

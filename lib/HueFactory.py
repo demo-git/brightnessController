@@ -53,7 +53,7 @@ class HueFactory:
                 status = 1
             else:
                 logging.log(logging.INFO, 'POST get_user ' + str(response.status))
-                sys.stdout.write(data[0]['error'])
+                sys.stdout.write(data[0]['error']['description'])
 
             x += 1
             request.close()

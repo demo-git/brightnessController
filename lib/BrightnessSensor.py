@@ -23,3 +23,7 @@ class BrightnessSensor(Sensor):
 
         for observer in self.__observers:
             observer.update(args)
+
+    # TODO: supprimer après test
+    def update(self):
+        self.notify(50)

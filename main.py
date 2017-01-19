@@ -62,3 +62,6 @@ while True:
 
     # sleep for optimize performance
     time.sleep(0.2)
+
+    # TODO: supprimer après test
+    sensor.update()

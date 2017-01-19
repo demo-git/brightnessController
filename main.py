@@ -7,6 +7,7 @@ from lib.HueFactory import HueFactory
 from optparse import OptionParser
 from lib.Button import Button
 from lib.Led import Led
+import sys
 
 
 # argument
@@ -42,10 +43,13 @@ if status != 'error':
             sensor.add_observers(factory.generate())
         else:
             logging.log(logging.ERROR, 'impossible de générer les hues')
+            sys.stdout.write('impossible de générer les hues\r')
     else:
         logging.log(logging.ERROR, 'pas de user trouvé')
+        sys.stdout.write('pas de user trouvé\r')
 else:
     logging.log(logging.ERROR, 'pas de bridge trouvé')
+    sys.stdout.write('pas de bridge trouvé\r')
 button = Button(channel_button)
 led = Led(channel_led)
 
@@ -53,10 +57,12 @@ led = Led(channel_led)
 while True:
     if button.get_state() == 1:
         if state == 0:
+            sys.stdout.write('change state to active\r')
             state = 1
             sensor.add_event()
     else:
         if state == 1:
+            sys.stdout.write('change state to off\r')
             state = 0
             sensor.remove_event()
 

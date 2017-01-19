@@ -9,7 +9,7 @@ class Sensor(Observable):
     def __init__(self, channel):
         Observable.__init__(self)
         self.__channel = channel
-        GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(channel, GPIO.IN)
 
     # callback observer
     def update(self):
@@ -17,7 +17,7 @@ class Sensor(Observable):
 
     # add an event for listen GPIO
     def add_event(self):
-        GPIO.add_event_detect(self.__channel, GPIO.FALLING, callback=lambda x: self.update(), bouncetime=200)
+        GPIO.add_event_detect(self.__channel, GPIO.RISING, callback=lambda x: self.update(), bouncetime=200)
 
     # remove event of listen GPIO
     def remove_event(self):

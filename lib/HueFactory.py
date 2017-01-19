@@ -44,9 +44,7 @@ class HueFactory:
         x = 0
         while status != 1 and x < 5:
             sys.stdout.write(str(x))
-            sys.stdout.write(self.__connect)
             request = httplib.HTTPConnection(self.__connect)
-            sys.stdout.write('test before answer')
             request.request("POST", "/api", '{"devicetype":"rasp_brightness_sensor"}')
             sys.stdout.write('first')
             response = request.getresponse()

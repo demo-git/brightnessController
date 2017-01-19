@@ -11,10 +11,10 @@ from lib.Led import Led
 
 # argument
 parser = OptionParser()
-parser.add_option("-i", "--cbri", dest="cbri", help="Channel brightness")
-parser.add_option("-b", "--cb", dest="cb", help="Channel button")
-parser.add_option("-l", "--cl", dest="cl", help="Channel led")
-parser.add_option("-p", "--percent", dest="percent", help="percent limit for hue off")
+parser.add_option("-i", "--cbri", dest="cbri", help="Channel brightness", type=int)
+parser.add_option("-b", "--cb", dest="cb", help="Channel button", type=int)
+parser.add_option("-l", "--cl", dest="cl", help="Channel led", type=int)
+parser.add_option("-p", "--percent", dest="percent", help="percent limit for hue off", type=int)
 (options, args) = parser.parse_args()
 
 # init var

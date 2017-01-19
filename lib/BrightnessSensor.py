@@ -29,4 +29,4 @@ class BrightnessSensor(Sensor):
 
     # TODO: supprimer après test
     def update(self):
-        self.notify(700)
+        self.notify(50)

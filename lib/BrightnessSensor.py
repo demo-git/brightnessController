@@ -1,5 +1,6 @@
 # coding: utf-8
 from Sensor import Sensor
+import sys
 
 
 class BrightnessSensor(Sensor):
@@ -15,11 +16,13 @@ class BrightnessSensor(Sensor):
     def notify(self, args):
         # percent of luminosity
         args = (args*100)/self.__max
+        sys.stdout.write(' | ' + str(args))
         if args >= self.__threshold:
             args = -1
         else:
             # percent of hue use needs
             args = 100 - ((args*100)/self.__threshold)
+            sys.stdout.write(' | ' + str(args))
 
         for observer in self._observers:
             observer.update(args)

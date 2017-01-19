@@ -55,7 +55,6 @@ led = Led(channel_led)
 
 # works
 while True:
-    sys.stdout.writelines('0')
     if button.get_state() == 1:
         if state == 0:
             sys.stdout.writelines('change state to active\r')
@@ -71,4 +70,4 @@ while True:
     time.sleep(0.2)
 
     # TODO: supprimer après test
-    sensor.update()
+    # sensor.update()

@@ -14,7 +14,7 @@ class Led(Observer):
 
     # callback observer
     def update(self, state):
-        sys.stdout.write('moove ma gueule\r')
+        sys.stdout.writelines('moove ma gueule\r')
         GPIO.output(self.__channel, state)
 
     def __del__(self):

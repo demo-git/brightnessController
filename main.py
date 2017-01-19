@@ -32,30 +32,30 @@ GPIO.setwarnings(True)
 GPIO.setmode(GPIO.BOARD)
 
 # init object
-sys.stdout.write('create sensor\r')
+sys.stdout.writelines('create sensor\r')
 sensor = BrightnessSensor(channel_brightness, percent, maxi)
-sys.stdout.write('create factory\r')
+sys.stdout.writelines('create factory\r')
 factory = HueFactory()
-sys.stdout.write('start requests\r')
+sys.stdout.writelines('start requests\r')
 status = factory.get_connect()
 if status != 'error':
     status = factory.get_user()
-    sys.stdout.write('trouver user\r')
+    sys.stdout.writelines('trouver user\r')
     if status != 0:
         status = factory.get_lights()
-        sys.stdout.write('compter les hues\r')
+        sys.stdout.writelines('compter les hues\r')
         if status != 0:
             sensor.add_observers(factory.generate())
-            sys.stdout.write('générer les hues\r')
+            sys.stdout.writelines('générer les hues\r')
         else:
             logging.log(logging.ERROR, 'impossible de générer les hues')
-            sys.stdout.write('impossible de générer les hues\r')
+            sys.stdout.writelines('impossible de générer les hues\r')
     else:
         logging.log(logging.ERROR, 'pas de user trouvé')
-        sys.stdout.write('pas de user trouvé\r')
+        sys.stdout.writelines('pas de user trouvé\r')
 else:
     logging.log(logging.ERROR, 'pas de bridge trouvé')
-    sys.stdout.write('pas de bridge trouvé\r')
+    sys.stdout.writelines('pas de bridge trouvé\r')
 button = Button(channel_button)
 led = Led(channel_led)
 
@@ -63,12 +63,12 @@ led = Led(channel_led)
 while True:
     if button.get_state() == 1:
         if state == 0:
-            sys.stdout.write('change state to active\r')
+            sys.stdout.writelines('change state to active\r')
             state = 1
             sensor.add_event()
     else:
         if state == 1:
-            sys.stdout.write('change state to off\r')
+            sys.stdout.writelines('change state to off\r')
             state = 0
             sensor.remove_event()
 

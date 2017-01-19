@@ -54,6 +54,7 @@ sensor.update()
 button = Button(channel_button)
 button.add_event()
 led = Led(channel_led)
+led.update(1)
 
 # works
 while True:

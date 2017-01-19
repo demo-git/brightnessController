@@ -19,6 +19,7 @@ class Hue(Observer):
     # change the state of hue light and its intensity
     def change_state(self, on, intensity=None):
         intensity = (intensity*254)/100
+        sys.stdout.write('change ' + str(intensity))
         request = httplib.HTTPConnection(self.__connect)
         string = "/api/" + self.__user + "/lights/" + str(self.__number) + "/state"
 
@@ -37,7 +38,6 @@ class Hue(Observer):
 
     # callback observer
     def update(self, intensity):
-        sys.stdout.write('change\r' + str(intensity))
         if intensity > 0:
             self.change_state(1, intensity)
         else:

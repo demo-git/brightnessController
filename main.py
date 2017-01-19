@@ -32,8 +32,11 @@ GPIO.setwarnings(True)
 GPIO.setmode(GPIO.BOARD)
 
 # init object
+sys.stdout.write('create sensor\r')
 sensor = BrightnessSensor(channel_brightness, percent, maxi)
+sys.stdout.write('create factory\r')
 factory = HueFactory()
+sys.stdout.write('start requests\r')
 status = factory.get_connect()
 if status != 'error':
     status = factory.get_user()

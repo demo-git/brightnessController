@@ -4,14 +4,25 @@ import time
 import logging
 from lib.BrightnessSensor import BrightnessSensor
 from lib.HueFactory import HueFactory
+from optparse import OptionParser
 from lib.Button import Button
 from lib.Led import Led
 
+
+# argument
+parser = OptionParser()
+parser.add_option("-i", "--cbri", dest="cbri", help="Channel brightness")
+parser.add_option("-b", "--cb", dest="cb", help="Channel button")
+parser.add_option("-l", "--cl", dest="cl", help="Channel led")
+parser.add_option("-p", "--percent", dest="percent", help="percent limit for hue off")
+(options, args) = parser.parse_args()
+
 # init var
-channel_brightness = 1
-channel_button = 2
-channel_led = 3
-percent = 70
+channel_brightness = options.cbri
+channel_button = options.cb
+channel_led = options.cl
+# default 70
+percent = options.percent
 maxi = 1024
 state = 0
 

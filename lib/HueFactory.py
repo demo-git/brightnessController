@@ -46,6 +46,7 @@ class HueFactory:
             sys.stdout.write(str(x))
             request = httplib.HTTPConnection(self.__connect)
             request.request("POST", "/api", '{"devicetype":"rasp_brightness_sensor"}')
+            sys.stdout.write('test before answer')
             response = request.getresponse()
             sys.stdout.write('test')
             if response.status == 200:

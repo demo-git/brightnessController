@@ -19,7 +19,7 @@ class Sensor(Observable):
 
     # add an event for listen GPIO
     def add_event(self):
-        GPIO.add_event_detect(self.__channel, GPIO.BOTH, callback=self.update)
+        GPIO.add_event_detect(self.__channel, GPIO.BOTH, callback=self.update, bouncetime=200)
 
     # remove event of listen GPIO
     def remove_event(self):

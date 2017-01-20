@@ -23,5 +23,10 @@ class Sensor(Observable):
     def remove_event(self):
         GPIO.remove_event_detect(self.__channel)
 
+    # notify all observers
+    def notify(self, args):
+        for observer in self._observers:
+            observer.update(args)
+
     def __del__(self):
         GPIO.cleanup(self.__channel)

@@ -58,12 +58,10 @@ button.add_event()
 while True:
     if button.get_state() == 1:
         if state == 0:
-            sys.stdout.writelines('change state to active\r')
             state = 1
             sensor.add_event()
     else:
         if state == 1:
-            sys.stdout.writelines('change state to off\r')
             state = 0
             sensor.remove_event()
 

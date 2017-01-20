@@ -14,7 +14,7 @@ class Sensor(Observable):
 
     # callback observer
     def update(self, value):
-        sys.stdout.write(GPIO.input(value))
+        sys.stdout.write(GPIO.input(str(value)))
         self.notify(GPIO.input(value))
 
     # add an event for listen GPIO

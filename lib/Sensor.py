@@ -1,7 +1,6 @@
 # coding: utf-8
 import RPi.GPIO as GPIO
 from Observable import Observable
-import sys
 
 
 class Sensor(Observable):
@@ -14,8 +13,7 @@ class Sensor(Observable):
 
     # callback observer
     def update(self, value):
-        sys.stdout.write(str(value))
-        self.notify(value)
+        self.notify(GPIO.input(value))
 
     # add an event for listen GPIO
     def add_event(self):

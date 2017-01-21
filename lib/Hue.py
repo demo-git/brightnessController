@@ -25,7 +25,7 @@ class Hue(Observer):
         request = httplib.HTTPConnection(self.__connect)
 
         if on == 1:
-            intensity = round((intensity * 254) / 100)
+            intensity = int(round((intensity * 254) / 100))
             sys.stdout.write(str(intensity))
             request.request("PUT", self.__string, '{"on":true, "bri":' + str(intensity) + '}')
         else:

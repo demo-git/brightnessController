@@ -35,8 +35,8 @@ if status != 'error':
             hues = factory.generate()
             buttonM.add_observers(hues)
             buttonL.add_observers(hues)
-            buttonM.add_event()
-            buttonL.add_event()
+            buttonM.add_event(1)
+            buttonL.add_event(1)
 
             sys.stdout.write("\nPush a keyboard key for quit...")
 

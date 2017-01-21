@@ -40,14 +40,14 @@ if status != 'error':
             # buttonL.add_event(1)
 
             x = 0
-            while x < 10:
+            while x < 100:
                 buttonM.update(5)
-                time.sleep(1)
+                time.sleep(0.1)
                 x += 1
 
             while x > 0:
                 buttonL.update(5)
-                time.sleep(0.3)
+                time.sleep(0.1)
                 x -= 1
 
             sys.stdout.write("\nPush a keyboard key for quit...")

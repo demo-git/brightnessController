@@ -16,6 +16,7 @@ class Hue(Observer):
         self.__connect = connect
         self.__string = "/api/" + user + "/lights/" + str(number) + "/state"
         self.__lock = Lock()
+        self.__intensity = 0
         self.change_state(0)
 
     # change the state of hue light and its intensity

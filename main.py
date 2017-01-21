@@ -4,6 +4,7 @@ import logging
 from lib.HueFactory import HueFactory
 from optparse import OptionParser
 from lib.Button import Button
+import time
 import sys
 
 
@@ -17,8 +18,7 @@ parser.add_option("-p", "--percent", dest="percent", help="Percent", type=int)
 # init var
 percent = options.percent
 
-# TODO: set warnings to false in production
-GPIO.setwarnings(True)
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BCM)
 
 # init object
@@ -35,8 +35,20 @@ if status != 'error':
             hues = factory.generate()
             buttonM.add_observers(hues)
             buttonL.add_observers(hues)
-            buttonM.add_event(1)
-            buttonL.add_event(1)
+            # TODO: activé avec buton qui marche #epsiCestDeLaMerde
+            # buttonM.add_event(1)
+            # buttonL.add_event(1)
+
+            x = 0
+            while x < 10:
+                buttonM.update(5)
+                time.sleep(2)
+                x += 1
+
+            while x > 0:
+                buttonL.update(5)
+                time.sleep(2)
+                x -= 1
 
             sys.stdout.write("\nPush a keyboard key for quit...")
 

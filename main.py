@@ -40,7 +40,7 @@ if status != 'error':
             # buttonL.add_event(1)
 
             x = 0
-            while x < 100:
+            while x < 10:
                 buttonM.update(5)
                 time.sleep(1)
                 x += 1

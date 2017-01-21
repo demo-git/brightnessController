@@ -12,6 +12,6 @@ class Button(Sensor):
 
     # notify all of observers if state change
     def notify(self, args):
-        sys.stdout.write(str(1))
+        sys.stdout.write(self.__value)
         for observer in self._observers:
             observer.update(self.__value)

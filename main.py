@@ -4,7 +4,6 @@ import logging
 from lib.HueFactory import HueFactory
 from optparse import OptionParser
 from lib.Button import Button
-from threading import Event
 import sys
 
 
@@ -16,7 +15,6 @@ parser.add_option("-p", "--percent", dest="percent", help="Percent", type=int)
 (options, args) = parser.parse_args()
 
 # init var
-event = Event()
 percent = options.percent
 
 # TODO: set warnings to false in production
@@ -44,9 +42,8 @@ if status != 'error':
 
             try:
                 raw_input()
-                event.set()
             except KeyboardInterrupt:
-                event.set()
+                pass
 
         else:
             logging.log(logging.ERROR, 'impossible de générer les hues')

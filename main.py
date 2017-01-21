@@ -1,38 +1,32 @@
 # coding: utf-8
 import RPi.GPIO as GPIO
-import time
 import logging
-from lib.BrightnessSensor import BrightnessSensor
 from lib.HueFactory import HueFactory
 from optparse import OptionParser
 from lib.Button import Button
-from lib.Led import Led
+from threading import Event
 import sys
 
 
 # argument
 parser = OptionParser()
-parser.add_option("-i", "--cbri", dest="cbri", help="Channel brightness", type=int)
-parser.add_option("-b", "--cb", dest="cb", help="Channel button", type=int)
-parser.add_option("-l", "--cl", dest="cl", help="Channel led", type=int)
-parser.add_option("-p", "--percent", dest="percent", help="percent limit for hue off", type=int)
+parser.add_option("-l", "--btnl", dest="btnl", help="Channel button less", type=int)
+parser.add_option("-m", "--btnm", dest="btnm", help="Channel button more", type=int)
+parser.add_option("-p", "--percent", dest="percent", help="Percent", type=int)
 (options, args) = parser.parse_args()
 
 # init var
-channel_brightness = options.cbri
-channel_button = options.cb
-channel_led = options.cl
-# default 70
+event = Event()
 percent = options.percent
-maxi = 1024
-state = 0
 
 # TODO: set warnings to false in production
 GPIO.setwarnings(True)
 GPIO.setmode(GPIO.BCM)
 
 # init object
-sensor = BrightnessSensor(channel_brightness, percent, maxi)
+buttonL = Button(options.btnl, percent * -1)
+buttonM = Button(options.btnm, percent)
+
 factory = HueFactory()
 status = factory.get_connect()
 if status != 'error':
@@ -40,30 +34,23 @@ if status != 'error':
     if status != 0:
         status = factory.get_lights()
         if status != 0:
-            sensor.add_observers(factory.generate())
+            hues = factory.generate()
+            buttonM.add_observers(hues)
+            buttonL.add_observers(hues)
+            buttonM.add_event()
+            buttonL.add_event()
+
+            sys.stdout.write("\nPush a keyboard key for quit...")
+
+            try:
+                raw_input()
+                event.set()
+            except KeyboardInterrupt:
+                event.set()
+
         else:
             logging.log(logging.ERROR, 'impossible de générer les hues')
     else:
         logging.log(logging.ERROR, 'pas de user trouvé')
 else:
     logging.log(logging.ERROR, 'pas de bridge trouvé')
-
-button = Button(channel_button)
-led = Led(channel_led)
-led.update(0)
-button.add_observer(led)
-button.add_event()
-
-# works
-while True:
-    if button.get_state() == 1:
-        if state == 0:
-            state = 1
-            sensor.add_event()
-    else:
-        if state == 1:
-            state = 0
-            sensor.remove_event()
-
-    # sleep for optimize performance
-    time.sleep(0.2)

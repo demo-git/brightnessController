@@ -1,33 +1,16 @@
 # coding: utf-8
 from Sensor import Sensor
-from threading import Lock
 
 
 class Button(Sensor):
-    __state = None
-    __lock = None
+    __value = None
 
-    def __init__(self, channel):
+    def __init__(self, channel, value):
         Sensor.__init__(self, channel)
-        self.__lock = Lock()
+        self.__value = value
 
     # notify all of observers if state change
     def notify(self, args):
         if args == 1:
-            self.__lock.acquire()
-            if self.__state == 0:
-                self.__state = 1
-            else:
-                self.__state = 0
-
             for observer in self._observers:
-                observer.update(self.__state)
-
-            self.__lock.release()
-
-    # return current state
-    def get_state(self):
-        self.__lock.acquire()
-        state = self.__state
-        self.__lock.release()
-        return state
+                observer.update(self.__value)

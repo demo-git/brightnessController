@@ -26,6 +26,7 @@ class Hue(Observer):
 
         if on == 1:
             intensity = round((intensity * 254) / 100)
+            sys.stdout.write(str(intensity))
             request.request("PUT", self.__string, '{"on":true, "bri":' + str(intensity) + '}')
         else:
             request.request("PUT", self.__string, '{"on":false}')
@@ -41,11 +42,14 @@ class Hue(Observer):
     # callback observer
     def update(self, value):
         self.__lock.acquire()
-        self.__intensity += value
-        tmp = self.__intensity
+        tmp = -1
+        if (self.__intensity > 0 and value < 0) or (self.__intensity < 100 and value > 0):
+            self.__intensity += value
+            tmp = self.__intensity
+
         self.__lock.release()
-        sys.stdout.write(str(tmp))
-        if tmp > 0:
-            self.change_state(1, tmp)
-        else:
-            self.change_state(0)
+        if tmp != -1:
+            if tmp > 0:
+                self.change_state(1, tmp)
+            else:
+                self.change_state(0)

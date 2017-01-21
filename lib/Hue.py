@@ -3,6 +3,7 @@ import httplib
 import logging
 from threading import Lock
 from Observer import Observer
+import sys
 
 
 class Hue(Observer):
@@ -43,7 +44,7 @@ class Hue(Observer):
         self.__intensity += value
         tmp = self.__intensity
         self.__lock.release()
-
+        sys.stdout.write(str(tmp))
         if tmp > 0:
             self.change_state(1, tmp)
         else:

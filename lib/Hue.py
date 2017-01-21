@@ -3,7 +3,6 @@ import httplib
 import logging
 from threading import Lock
 from Observer import Observer
-import sys
 
 
 class Hue(Observer):
@@ -26,7 +25,6 @@ class Hue(Observer):
 
         if on == 1:
             intensity = int(round((intensity * 254) / 100))
-            sys.stdout.write(str(intensity))
             request.request("PUT", self.__string, '{"on":true, "bri":' + str(intensity) + '}')
         else:
             request.request("PUT", self.__string, '{"on":false}')

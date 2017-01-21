@@ -35,20 +35,8 @@ if status != 'error':
             hues = factory.generate()
             buttonM.add_observers(hues)
             buttonL.add_observers(hues)
-            # TODO: activé avec buton qui marche #epsiCestDeLaMerde
-            # buttonM.add_event(1)
-            # buttonL.add_event(1)
-
-            x = 0
-            while x < 10:
-                buttonM.update(5)
-                time.sleep(1)
-                x += 1
-
-            while x > 0:
-                buttonL.update(5)
-                time.sleep(1)
-                x -= 1
+            buttonM.add_event(1)
+            buttonL.add_event(1)
 
             sys.stdout.write("\nPush a keyboard key for quit...")
 

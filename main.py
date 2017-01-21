@@ -42,12 +42,12 @@ if status != 'error':
             x = 0
             while x < 10:
                 buttonM.update(5)
-                time.sleep(2)
+                time.sleep(1)
                 x += 1
 
             while x > 0:
                 buttonL.update(5)
-                time.sleep(2)
+                time.sleep(0.3)
                 x -= 1
 
             sys.stdout.write("\nPush a keyboard key for quit...")

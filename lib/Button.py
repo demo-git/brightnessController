@@ -1,5 +1,6 @@
 # coding: utf-8
 from Sensor import Sensor
+import sys
 
 
 class Button(Sensor):
@@ -11,5 +12,6 @@ class Button(Sensor):
 
     # notify all of observers if state change
     def notify(self, args):
+        sys.stdout.write(str(1))
         for observer in self._observers:
             observer.update(self.__value)

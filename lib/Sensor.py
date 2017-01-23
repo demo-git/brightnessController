@@ -10,7 +10,7 @@ class Sensor(Observable):
     def __init__(self, channel):
         Observable.__init__(self)
         self.__channel = channel
-        GPIO.setup(channel, GPIO.IN)
+        GPIO.setup(channel, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
     # callback observer
     def update(self, chan):

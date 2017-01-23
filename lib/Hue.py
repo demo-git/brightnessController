@@ -43,9 +43,9 @@ class Hue(Observer):
         self.__lock.acquire()
         tmp = -1
         if (self.__intensity > 0 and value < 0) or (self.__intensity < 100 and value > 0):
-            sys.stdout.write(str(value))
             self.__intensity += value
             tmp = self.__intensity
+            sys.stdout.write(str(tmp))
 
         self.__lock.release()
         if tmp != -1:

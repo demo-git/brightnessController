@@ -40,7 +40,7 @@ class Hue(Observer):
 
     # callback observer
     def update(self, value):
-        sys.stdout.write(str(1))
+        sys.stdout.write(str(value))
         self.__lock.acquire()
         tmp = -1
         if (self.__intensity > 0 and value < 0) or (self.__intensity < 100 and value > 0):
